@@ -22,6 +22,10 @@ def plot(value = None):
     dsPIC.flushOutput()
     voltaje = open('voltaje.txt', 'w+b')
     vtemp=voltaje.readlines()
+
+    bytesToRead = dsPIC.inWaiting()
+    datos = dsPIC.read(bytesToRead)
+    
     while len(vtemp)<int(value)*2424:
         bytesToRead = dsPIC.inWaiting()
         datos = dsPIC.read(bytesToRead)
@@ -55,5 +59,7 @@ def create_figure():
     return fig
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host = "192.168.1.72", port = 5000, debug = True)
+
+    
 
