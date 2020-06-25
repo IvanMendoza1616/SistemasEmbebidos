@@ -22,7 +22,7 @@ def plot(value = None):
     dsPIC.flushOutput()
     voltaje = open('voltaje.txt', 'w+b')
     vtemp=voltaje.readlines()
-    while len(vtemp)<10000:
+    while len(vtemp)<int(value)*2424:
         bytesToRead = dsPIC.inWaiting()
         datos = dsPIC.read(bytesToRead)
         print(datos)
