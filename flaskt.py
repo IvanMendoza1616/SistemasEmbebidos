@@ -25,11 +25,14 @@ def plot(value = None):
 
     bytesToRead = dsPIC.inWaiting()
     datos = dsPIC.read(bytesToRead)
-    
+    dsPIC.flushInput()
+    dsPIC.flushOutput()
+    dsPIC.read_all()
+
     while len(vtemp)<int(value)*2424:
         bytesToRead = dsPIC.inWaiting()
         datos = dsPIC.read(bytesToRead)
-        print(datos)
+        #print(datos)
         voltaje.write(datos)
         with open('voltaje.txt')as v1:
             vtemp = v1.readlines()
@@ -37,7 +40,7 @@ def plot(value = None):
     output = io.BytesIO()
     FigureCanvas(fig).print_png(output)
     fig.savefig('temp.png',dpi = 1000)
-    print(len(vtemp))
+    #print(len(vtemp))
 
     return Response(output.getvalue(),mimetype = 'image/png')
 
