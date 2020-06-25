@@ -20,7 +20,7 @@ def root():
 
 @app.route('/plot/<value>')
 def plot(value=None):
-    dsPIC = serial.Serial('COM4',115200)
+    dsPIC = serial.Serial('/dev/ttyS3',115200)
     dsPIC.flushInput()
     dsPIC.flushOutput()
     
