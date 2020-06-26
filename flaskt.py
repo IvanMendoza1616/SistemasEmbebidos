@@ -8,8 +8,12 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt 
 import serial
+import os
+
+PLOT_FOLDER = os.path.join('SistemasEmbebidos','plots')
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = PLOT_FOLDER
 
 @app.route("/")
 def root():
@@ -40,10 +44,10 @@ def plot(value = None):
     fig = create_figure()
     output = io.BytesIO()
     FigureCanvas(fig).print_png(output)
-    fig.savefig('templates/temp.png',dpi = 100)
+    fig.savefig('plots/temp.png',dpi = 100)
     #print(len(vtemp))
-
-    return render_template("index.html",vf = lastvoltage()*5/1024)
+    full_filename= os.path.join(app.config['UPLOAD_FOLDER'],'temp.png')
+    return render_template("index.html",vf = lastvoltage()*5/1024,plotimg = full_filename)
 
 def lastvoltage():
     with open('voltaje.txt') as file:
