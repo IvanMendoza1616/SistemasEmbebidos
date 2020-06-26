@@ -48,7 +48,7 @@ def plot(value = None):
     
     fig.savefig('static/' +  nname,dpi = 100)
     #print(len(vtemp))
-    return render_template("index.html",vf = lastvoltage()*5/1024,plotimg = nname,secs = value)
+    return render_template("plot.html",vf = lastvoltage()*5/1024,plotimg = nname,secs = value)
 
 def lastvoltage():
     with open('voltaje.txt') as file:
@@ -61,7 +61,7 @@ def create_figure():
         file_data = file.readlines()
     x = []
     y = []
-    for i in range (1,len(file_data)):
+    for i in range (1,len(file_data)-1):
         try:
             y.append(int(file_data[i])*5/1024)
         except:pass
