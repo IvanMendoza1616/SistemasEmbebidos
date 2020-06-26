@@ -2,6 +2,7 @@ from flask import Flask
 from flask import Response
 from flask import render_template
 from flask import request
+from flask import url_for
 import io
 import numpy as np
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
@@ -9,13 +10,14 @@ from matplotlib.figure import Figure
 import matplotlib.pyplot as plt 
 import serial
 import os
+import time
 
 app = Flask(__name__)
 
 @app.route("/")
 def root():
     test = 1
-    return "<img src = plots/temp.png alt = grafica>"
+    return 0
 
 @app.route('/plot/<value>')
 def plot(value = None):
@@ -41,9 +43,12 @@ def plot(value = None):
     fig = create_figure()
     output = io.BytesIO()
     FigureCanvas(fig).print_png(output)
-    fig.savefig('static/temp.png',dpi = 100)
+
+    nname = "temp" + str(time.time()) +  ".png"
+    
+    fig.savefig('static/' +  nname,dpi = 100)
     #print(len(vtemp))
-    return render_template("index.html",vf = lastvoltage()*5/1024,plotimg="temp.png")
+    return render_template("index.html",vf = lastvoltage()*5/1024,plotimg = nname)
 
 def lastvoltage():
     with open('voltaje.txt') as file:
