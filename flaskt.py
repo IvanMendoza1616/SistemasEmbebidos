@@ -13,7 +13,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def root():
-    return "dsPIC"
+    test = 1
+    return render_template("index.html",vf = test)
 
 @app.route('/plot/<value>')
 def plot(value = None):
@@ -39,10 +40,16 @@ def plot(value = None):
     fig = create_figure()
     output = io.BytesIO()
     FigureCanvas(fig).print_png(output)
-    fig.savefig('temp.png',dpi = 1000)
+    fig.savefig('templates/temp.png',dpi = 100)
     #print(len(vtemp))
 
-    return Response(output.getvalue(),mimetype = 'image/png')
+    return render_template("index.html",vf = lastvoltage()*5/1024)
+
+def lastvoltage():
+    with open('voltaje.txt') as file:
+        file_data = file.readlines()
+    return int(file_data[-2])
+
 
 def create_figure():
     with open('voltaje.txt') as file:
