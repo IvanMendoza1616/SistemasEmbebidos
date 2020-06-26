@@ -32,7 +32,7 @@ def plot(value = None):
     dsPIC.flushInput()
     dsPIC.flushOutput()
     dsPIC.read_all()
-
+    voltaje = open('voltaje.txt', 'w+b')
     while len(vtemp)<int(value)*2424:
         bytesToRead = dsPIC.inWaiting()
         datos = dsPIC.read(bytesToRead)
@@ -48,7 +48,7 @@ def plot(value = None):
     
     fig.savefig('static/' +  nname,dpi = 100)
     #print(len(vtemp))
-    return render_template("index.html",vf = lastvoltage()*5/1024,plotimg = nname)
+    return render_template("index.html",vf = lastvoltage()*5/1024,plotimg = nname,secs = value)
 
 def lastvoltage():
     with open('voltaje.txt') as file:
@@ -66,7 +66,7 @@ def create_figure():
             y.append(int(file_data[i])*5/1024)
         except:pass
     for i in range(len(y)):
-        x.append(int(i))
+        x.append(int(i)/2424)
     fig = Figure()
     axis = fig.add_subplot(1,1,1)
     axis.plot(x,y,linewidth = 0.5)
