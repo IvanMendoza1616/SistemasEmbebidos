@@ -3,6 +3,7 @@ from flask import Response
 from flask import render_template
 from flask import request
 from flask import url_for
+from flask import redirect
 import io
 import numpy as np
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
@@ -16,8 +17,15 @@ app = Flask(__name__)
 
 @app.route("/")
 def root():
-    test = 1
     return 0
+
+@app.route("/home",methods = ["POST", "GET"])
+def home():
+    if request.method == "POST":
+        seconds = request.form["secs"]
+        return redirect(url_for("plot",value = int(seconds)))
+    else:
+        return render_template("home.html")
 
 @app.route('/plot/<value>')
 def plot(value = None):

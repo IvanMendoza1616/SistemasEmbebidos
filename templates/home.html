@@ -1,0 +1,11 @@
+{%extends "base.html"%}
+{%block title%}Home page{%endblock%}
+{%block content%}
+<h3 align = "center">EV Charger battery plotter </h3>
+<p align = "center">Please submit the number of seconds you want to plot the current battery voltage of your EV </p>
+<form action = "#" method = "post">
+	<p align = "center">Seconds:
+	<input type = "text" name = "secs" /></p>
+	<p align = "center"><input type = "submit" value = "submit" /></p>
+</form>
+{%endblock%}
