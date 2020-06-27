@@ -3,13 +3,13 @@
 The current project is designed to visualize the battery voltage of an electric vehicle. A dsPIC microcontroller is used to read voltage and send infomation onto a web page. 
 
 
-##dsPIC
+## dsPIC
 The dsPIC used is the dsPIC33EV256GM102. Analog voltage is read through pin 2 and UART transmission is performed on pin 11. 
 ### Hardware required
-..* PicKit 3
+* PicKit 3
 ### Software required
-..* MPLAB X IDE
-..* MPLAB X IPE
+* MPLAB X IDE
+* MPLAB X IPE
 
 1. Create a project on MPLAB X IDE and use [dsPIC.c](https://github.com/IvanMendoza1616/SistemasEmbebidos/blob/master/dsPIC.c)
 2. COmpile it and load it to the dsPIC with MPLAB X IPE
