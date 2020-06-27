@@ -1,48 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>10 Seconds Count Down Timer</title>
-
-	<style type="text/css">
-		@font-face{
-			font-family: sevenSegment;
-			src: url(seven-segment.ttf);
+{%extends "base.html"%}
+{%block title%}10 Seconds Count Down Timer{%endblock%}
+{%block content%}
+<h1 id="count">10</h1>
+<script type="text/javascript">
+	var counter = 10;
+	setInterval( function(){
+		counter--;
+		if( counter >= 0 ){
+			id = document.getElementById("count");
+			id.innerHTML = counter;
 		}
-
-		h1{
-			font-family: sevenSegment;
-			font-size: 15em;
-			color: #969696;
+		if( counter === 0 ){
+			id.innerHTML = "COMPLETE";
 		}
-
-		.container{
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-		}
-	</style>
-</head>
-<body>
-	<div class="container">
-		<h1 id="count">10</h1>
-	</div>
-
-	<script type="text/javascript">
-		var counter = 10;
-
-		setInterval( function(){
-			counter--;
-
-			if( counter >= 0 ){
-				id = document.getElementById("count");
-				id.innerHTML = counter;
-			}
-
-			if( counter === 0 ){
-				id.innerHTML = "COMPLETE";
-			}
-		}, 1000);
-	</script>
-</body>
-</html>
+	}, 1000);
+</script>
+{%endblock%}
