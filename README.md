@@ -1,9 +1,9 @@
 # SistemasEmbebidos
-##Final project
-##Embedded Systems
+## Final project
+## Embedded Systems
 
 
-##Web service
+## Web service
 
 ``` bash
 sudo apt install python3-pip
@@ -19,6 +19,6 @@ python ./flaskt.py
 2. Run the flask server on local ip address
 3. Be sure to have sudo privileges for listening to serial port
 
-##Author
+## Author
 IvanMendoza1616
 
