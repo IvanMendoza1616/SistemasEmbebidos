@@ -1,3 +1,7 @@
 pyserial
 numpy
 matplotlib
+time
+io
+os
+

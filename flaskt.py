@@ -1,9 +1,4 @@
-from flask import Flask
-from flask import Response
-from flask import render_template
-from flask import request
-from flask import url_for
-from flask import redirect
+from flask import Flask, Response, render_template, request, url_for, redirect
 import io
 import numpy as np
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
