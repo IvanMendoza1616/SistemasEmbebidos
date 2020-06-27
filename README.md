@@ -11,8 +11,8 @@ virtualenv -p python3 .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 pip install flask
-python ./flaskt.ṕy
+python ./flaskt.py
 ```
 
-Create directory plots in static/
+Create directory `plots` in `static/`
 Run the flask server on local ip address
