@@ -19,6 +19,10 @@ app = Flask(__name__)
 def root():
     return 0
 
+@app.route("/loading")
+def loading():
+    return render_template("loading.html")
+
 @app.route("/home",methods = ["POST", "GET"])
 def home():
     if request.method == "POST":
