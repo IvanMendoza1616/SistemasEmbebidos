@@ -5,23 +5,26 @@
 <p align = "center">Please submit the number of seconds you want to plot the current battery voltage of your EV </p>
 <form onsubmit = "load()" action = "#" method = "post">
 	<p align = "center">Seconds:
-	<input type = "text" name = "secs" /></p>
-	<p align = "center"><input type = "submit" value = "submit" /></p>
+	<input type = "text" name = "secs" id = "secs" /></p>
+	<p align = "center"><input type = "submit" value = "Plot" /></p>
 </form>
 
-<h1 align = "center" id="count">10</h1>
+<h1 align = "center" id="count">
+<span id = "secs"></span>
+</h1>
 <script type="text/javascript">
-	var counter = 10;
-	setInterval( load(){
+	function load(){
+	var counter =Number(document.getElementById("secs").value);
+	setInterval( function(){
 		counter--;
 		if( counter >= 0 ){
 			id = document.getElementById("count");
 			id.innerHTML = counter;
 		}
 		if( counter === 0 ){
-			id.innerHTML = "COMPLETE";
+			id.innerHTML = "Plotting...";
 		}
-	}, 1000);
+	}, 1000);}
 </script>
 
 
