@@ -52,9 +52,9 @@ def plot(value = None):
     output = io.BytesIO()
     FigureCanvas(fig).print_png(output)
 
-    nname = "temp" + str(time.time()) +  ".png"
+    nname = "plots/temp" + str(time.time()) +  ".png"
     
-    fig.savefig('static/' +  nname,dpi = 100)
+    fig.savefig('static/' +  nname,dpi = 300)
     #print(len(vtemp))
     return render_template("plot.html",vf = lastvoltage()*5/1024,plotimg = nname,secs = value)
 
