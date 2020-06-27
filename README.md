@@ -29,7 +29,7 @@ pip install flask
 
 Now follow these instructions:
 
-1. Create directory `plots` in `static/`.
+1. Create directory `plots` in `static`.
 2. Run the flask server on local ip address.
 3. Be logged in as super user for listening to serial port.
 
