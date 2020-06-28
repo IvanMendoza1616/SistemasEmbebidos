@@ -25,33 +25,30 @@ def plot(value = None):
     dsPIC.flushInput()
     dsPIC.flushOutput()
     
-    voltaje = open('voltaje.txt', 'w+b')
+    voltage = open('voltage.txt', 'w+b')
     initial_time = time.time()
     while time.time() - initial_time < int(value):
         bytesToRead = dsPIC.inWaiting()
         datos = dsPIC.read(bytesToRead)
-        #print(datos)
-        voltaje.write(datos)
-    voltaje.close()
+        voltage.write(datos)
+    voltage.close()
 
     fig = create_figure(int(value))
     output = io.BytesIO()
     FigureCanvas(fig).print_png(output)
-
-    nname = "plots/temp" + str(time.time()) +  ".png"
-    
+    nname = "plots/temp" + str(time.time()) +  ".png"    
     fig.savefig('static/' +  nname,dpi = 300)
-    #print(len(vtemp))
+
     return render_template("plot.html",vf = round(lastvoltage()*5/1024,2),plotimg = nname,secs = value)
 
 def lastvoltage():
-    with open('voltaje.txt') as file:
+    with open('voltage.txt') as file:
         file_data = file.readlines()
     return int(file_data[-2])
 
 
 def create_figure(fc):
-    with open('voltaje.txt') as file:
+    with open('voltage.txt') as file:
         file_data = file.readlines()
     x = []
     y = []
