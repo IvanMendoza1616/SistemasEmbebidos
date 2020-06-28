@@ -11,13 +11,6 @@ import time
 app = Flask(__name__)
 
 @app.route("/")
-def root():
-    return 0
-
-@app.route("/loading")
-def loading():
-    return render_template("loading.html")
-
 @app.route("/home",methods = ["POST", "GET"])
 def home():
     if request.method == "POST":
@@ -31,8 +24,9 @@ def plot(value = None):
     dsPIC = serial.Serial('/dev/ttyS3',115200)
     dsPIC.flushInput()
     dsPIC.flushOutput()
-    voltaje = open('voltaje.txt', 'w+b')
-    vtemp=voltaje.readlines()
+    #voltaje = open('voltaje.txt', 'w+b')
+    vtemp = ""
+    #voltaje.close()
 
     bytesToRead = dsPIC.inWaiting()
     datos = dsPIC.read(bytesToRead)
@@ -47,6 +41,8 @@ def plot(value = None):
         voltaje.write(datos)
         with open('voltaje.txt')as v1:
             vtemp = v1.readlines()
+    voltaje.close()
+
     fig = create_figure()
     output = io.BytesIO()
     FigureCanvas(fig).print_png(output)
@@ -55,7 +51,7 @@ def plot(value = None):
     
     fig.savefig('static/' +  nname,dpi = 300)
     #print(len(vtemp))
-    return render_template("plot.html",vf = lastvoltage()*5/1024,plotimg = nname,secs = value)
+    return render_template("plot.html",vf = round(lastvoltage()*5/1024,2),plotimg = nname,secs = value)
 
 def lastvoltage():
     with open('voltaje.txt') as file:

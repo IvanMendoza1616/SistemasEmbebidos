@@ -2,8 +2,8 @@
 {%block title%}Plot{%endblock%}
 {%block content%}
 <h3 align = "center">Plot of charger after {{secs}} seconds</h3>
-		<p><img src = "{{url_for('static',filename=plotimg)}}" alt = "plot" class = "center"></p>
-		<p align = "center">Last voltage read:{{vf}}</p>
+		<p><img src = "{{url_for('static',filename=plotimg)}}" alt = "plot" class = "center" style = "width:100%;"></p>
+		<p align = "center">Last voltage read: {{vf}}</p>
 
 		<form action = /home>
 			<p align = "center"><input type = "submit" value = "Return" /></p>
