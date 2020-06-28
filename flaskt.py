@@ -69,7 +69,6 @@ def create_figure(fc):
 
 if __name__ == "__main__":
     app.run(host = "192.168.1.72", port = 5000, debug = True)
-    #app.run(port = 5000, debug = True)
 
     
 

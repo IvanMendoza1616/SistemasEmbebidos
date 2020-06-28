@@ -30,7 +30,7 @@ pip install flask
 Now follow these instructions:
 
 1. Create directory `plots` in `static`.
-2. Run the flask server on local ip address.
+2.Change line 71 of [dsPIC.c](https://github.com/IvanMendoza1616/SistemasEmbebidos/blob/master/flaskt.py) and type your local IP address.
 3. Be logged in as super user for listening to serial port.
 
 Finally run the web service:
