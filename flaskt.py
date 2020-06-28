@@ -51,8 +51,7 @@ def create_figure(s):
         file_data = file.readlines()
     x = []
     y = []
-    for i in range (len(file_data) - (s*2424),len(file_data)-1):
-
+    for i in range (len(file_data) - ((s)*2424),len(file_data)-1):
         try:
             y.append(int(file_data[i])*5/1024)
         except:pass
@@ -62,7 +61,7 @@ def create_figure(s):
     axis = fig.add_subplot(1,1,1)
     axis.plot(x,y,linewidth = 0.5)
     axis.grid()
-    axis.axis([1,s,0,5])
+    axis.axis([0,s,0,5])
     return fig
 
 if __name__ == "__main__":

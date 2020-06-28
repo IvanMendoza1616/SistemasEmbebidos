@@ -17,11 +17,11 @@
 	var counter =Number(document.getElementById("secs").value);
 	setInterval( function(){
 		counter--;
-		if( counter >= 0 ){
+		if( counter >= -1 ){
 			id = document.getElementById("count");
 			id.innerHTML = counter;
 		}
-		if( counter === 0 ){
+		if( counter === -1 ){
 			id.innerHTML = "Plotting...";
 		}
 	}, 1000);}
