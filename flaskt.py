@@ -46,12 +46,13 @@ def lastvoltage():
         file_data = file.readlines()
     return int(file_data[-2])
 
-def create_figure(fc):
+def create_figure(s):
     with open('voltage.txt') as file:
         file_data = file.readlines()
     x = []
     y = []
-    for i in range (len(file_data)- (fc*2424),len(file_data)-1):
+    for i in range (len(file_data) - (s*2424),len(file_data)-1):
+
         try:
             y.append(int(file_data[i])*5/1024)
         except:pass
@@ -61,6 +62,7 @@ def create_figure(fc):
     axis = fig.add_subplot(1,1,1)
     axis.plot(x,y,linewidth = 0.5)
     axis.grid()
+    axis.axis([1,s,0,5])
     return fig
 
 if __name__ == "__main__":
