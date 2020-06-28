@@ -47,7 +47,7 @@ def lastvoltage():
     return int(file_data[-2])
 
 def create_figure(s):
-    with open('voltage.txt') as file:
+    with open('voltage.txt','r',errors = 'ignore') as file:
         file_data = file.readlines()
     x = []
     y = []
