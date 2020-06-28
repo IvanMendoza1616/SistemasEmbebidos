@@ -10,8 +10,8 @@ import time
 
 app = Flask(__name__)
 
-@app.route("/")
-@app.route("/home",methods = ["POST", "GET"])
+@app.route("/",methods = ["POST","GET"])
+@app.route("/home",methods = ["POST","GET"])
 def home():
     if request.method == "POST":
         seconds = request.form["secs"]
@@ -24,27 +24,17 @@ def plot(value = None):
     dsPIC = serial.Serial('/dev/ttyS3',115200)
     dsPIC.flushInput()
     dsPIC.flushOutput()
-    #voltaje = open('voltaje.txt', 'w+b')
-    vtemp = ""
-    #voltaje.close()
-
-    bytesToRead = dsPIC.inWaiting()
-    datos = dsPIC.read(bytesToRead)
-    dsPIC.flushInput()
-    dsPIC.flushOutput()
-    dsPIC.read_all()
-    #test timer
+    
     voltaje = open('voltaje.txt', 'w+b')
-    while len(vtemp)<int(value)*2424:
+    initial_time = time.time()
+    while time.time() - initial_time < int(value):
         bytesToRead = dsPIC.inWaiting()
         datos = dsPIC.read(bytesToRead)
         #print(datos)
         voltaje.write(datos)
-        with open('voltaje.txt')as v1:
-            vtemp = v1.readlines()
     voltaje.close()
 
-    fig = create_figure()
+    fig = create_figure(int(value))
     output = io.BytesIO()
     FigureCanvas(fig).print_png(output)
 
@@ -60,12 +50,12 @@ def lastvoltage():
     return int(file_data[-2])
 
 
-def create_figure():
+def create_figure(fc):
     with open('voltaje.txt') as file:
         file_data = file.readlines()
     x = []
     y = []
-    for i in range (1,len(file_data)-1):
+    for i in range (len(file_data)- (fc*2424),len(file_data)-1):
         try:
             y.append(int(file_data[i])*5/1024)
         except:pass
@@ -79,6 +69,7 @@ def create_figure():
 
 if __name__ == "__main__":
     app.run(host = "192.168.1.72", port = 5000, debug = True)
+    #app.run(port = 5000, debug = True)
 
     
 
