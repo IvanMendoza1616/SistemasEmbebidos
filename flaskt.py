@@ -33,6 +33,7 @@ def plot(value = None):
     dsPIC.flushInput()
     dsPIC.flushOutput()
     dsPIC.read_all()
+    #test timer
     voltaje = open('voltaje.txt', 'w+b')
     while len(vtemp)<int(value)*2424:
         bytesToRead = dsPIC.inWaiting()
