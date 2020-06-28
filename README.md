@@ -36,7 +36,7 @@ Now follow these instructions:
 Finally run the web service:
 
 ``` bash
-python ./flaskt.py
+python flaskt.py
 ```
 
 ## Author
