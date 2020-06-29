@@ -2,11 +2,19 @@
 {%block title%}Home page{%endblock%}
 {%block content%}
 <h3 align = "center">EV battery charger plotter </h3>
-<p align = "center">Please submit the number of seconds you want to plot the current battery voltage of your EV </p>
+
+<form method = "post">
+	<p align = "center">Click to know the current voltage of the battery</p>
+	<p align = "center"><input name = "submit_button" type = "submit" value = "Go"/></p>
+</form>
+
+<p align = "center">-OR- </p>
+
 <form onsubmit = "load()" action = "#" method = "post">
+	<p align = "center">Submit the number of seconds you want to plot the current battery voltage of your EV </p>
 	<p align = "center">Seconds:
 	<input type = "text" name = "secs" id = "secs" /></p>
-	<p align = "center"><input type = "submit" value = "Plot" /></p>
+	<p align = "center"><input name = "submit_button" type = "submit" value = "Plot" /></p>
 </form>
 
 <h1 align = "center" id="count">

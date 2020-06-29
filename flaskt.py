@@ -14,8 +14,22 @@ app = Flask(__name__)
 @app.route("/home",methods = ["POST","GET"])
 def home():
     if request.method == "POST":
-        seconds = request.form["secs"]
-        return redirect(url_for("plot",value = int(seconds)))
+        if request.form["submit_button"] == "Plot":
+            seconds = request.form["secs"]
+            return redirect(url_for("plot",value = int(seconds)))
+        else:
+            dsPIC = serial.Serial('/dev/ttyS3',115200)
+            dsPIC.flushInput()
+            dsPIC.flushOutput()
+    
+            voltage = open('voltage.txt', 'w+b')
+            initial_time = time.time()
+            while time.time() - initial_time < 1:
+                bytesToRead = dsPIC.inWaiting()
+                datos = dsPIC.read(bytesToRead)
+                voltage.write(datos)
+            voltage.close()
+            return render_template("actual.html",vf = round(lastvoltage()*5/1024,2))
     else:
         return render_template("home.html")
 
@@ -42,7 +56,7 @@ def plot(value = None):
     return render_template("plot.html",vf = round(lastvoltage()*5/1024,2),plotimg = nname,secs = value)
 
 def lastvoltage():
-    with open('voltage.txt') as file:
+    with open('voltage.txt','r',errors = 'ignore') as file:
         file_data = file.readlines()
     return int(file_data[-2])
 
