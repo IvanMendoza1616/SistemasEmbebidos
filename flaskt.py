@@ -15,8 +15,11 @@ app = Flask(__name__)
 def home():
     if request.method == "POST":
         if request.form["submit_button"] == "Plot":
-            seconds = request.form["secs"]
-            return redirect(url_for("plot",value = int(seconds)))
+            try:
+                seconds = request.form["secs"]
+                return redirect(url_for("plot",value = int(seconds)))
+            except:
+                return render_template("home.html")
         else:
             dsPIC = serial.Serial('/dev/ttyS3',115200)
             dsPIC.flushInput()

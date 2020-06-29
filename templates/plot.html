@@ -1,7 +1,7 @@
 {%extends "base.html"%}
 {%block title%}Plot{%endblock%}
 {%block content%}
-<h3 align = "center">Plot of charger after {{secs}} seconds</h3>
+<h1 align = "center">Plot of charger after {{secs}} seconds</h1>
 		<p><img src = "{{url_for('static',filename=plotimg)}}" alt = "plot" class = "center" style = "width:100%;"></p>
 		<p align = "center">Last voltage read: {{vf}} Volts</p>
 
